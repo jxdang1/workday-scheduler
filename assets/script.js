@@ -20,8 +20,10 @@ $(function () {
     timeBlocks.forEach(compareTime);
     timeBlocks.forEach(pullFromStorage);
 
+
+
     function compareTime (item) {
-        var currentTime = dayjs().hour;
+        var currentTime = dayjs().hour();
         var currentTimeBlock = item.id.slice(5);
 
         if (currentTimeBlock == currentTime) {
