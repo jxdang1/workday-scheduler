@@ -2,7 +2,7 @@
 // the code isn't run until the browser has finished rendering all the elements
 // in the html.
 $(function () {
-
+    // adds a listener ("click") to all .saveBtn classes
     document.querySelectorAll(".saveBtn").forEach(elem => elem.addEventListener("click", savedText));
 
 
@@ -17,15 +17,20 @@ $(function () {
 
     var timeBlocks = document.querySelectorAll(".time-block");
 
+    // for each time-block that has been selected (timeBlocks), it runs the compareTime function
     timeBlocks.forEach(compareTime);
+
+    // for each time-block that has been selected (timeBlocks), it runs the pullFromStorage function
     timeBlocks.forEach(pullFromStorage);
 
 
 
     function compareTime (item) {
         var currentTime = dayjs().hour();
+        // when you select the current time block, it should start at the 5th index that returns the hour. this will show us the current time.
         var currentTimeBlock = item.id.slice(5);
 
+        // this adds the styling after checking if it is in the past, present, or future
         if (currentTimeBlock == currentTime) {
             item.classList.add("present");
         } else if (currentTimeBlock < currentTime) {
@@ -35,11 +40,11 @@ $(function () {
         }
     }
    
-
+    // pulls each item from storage and puts a value in the corresponding textareas
     function pullFromStorage (item) {
     var currentItem = localStorage.getItem(item.id);
     item.querySelector("textarea").value = currentItem;
 }
-
+// shows the current date at the top of the page by gpulling from the currentDay element
 document.getElementById("currentDay").innerHTML = dayjs().format('dddd, MMMM DD');
   });
